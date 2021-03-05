@@ -3,7 +3,11 @@ const bcrypt = require('bcrypt');
 module.exports = function(router, database) {
 
   router.get('/', (req, res) => {
-    res.send('looking at users routes')
+    database.getAllUsers()
+      .then(result => {
+        res.send(result)
+      })
+    // res.send('looking at users routes')
   })
 
   // Create a new user

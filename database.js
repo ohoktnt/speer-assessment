@@ -29,3 +29,11 @@ const addUser = function(user) {
   .then(res => res.rows[0])
 }
 exports.addUser = addUser;
+
+const getAllUsers = function() {
+  return pool.query(`
+  SELECT * FROM users
+  `)
+  .then(res => res.rows[0])
+}
+exports.getAllUsers = getAllUsers;
