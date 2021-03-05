@@ -1,0 +1,18 @@
+DROP TABLE IF EXISTS users CASCADE;
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY NOT NULL,
+  username VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL
+);
+
+DROP TABLE IF EXISTS tweets CASCADE;
+
+CREATE TABLE tweets (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  content VARCHAR(255),
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+INSERT INTO users (username, password) VALUES ('tnt', '123456')
