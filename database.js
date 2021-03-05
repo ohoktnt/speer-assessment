@@ -34,6 +34,6 @@ const getAllUsers = function() {
   return pool.query(`
   SELECT * FROM users
   `)
-  .then(res => res.rows[0])
+  .then(res => res.rows)
 }
 exports.getAllUsers = getAllUsers;

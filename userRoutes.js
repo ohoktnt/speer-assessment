@@ -16,12 +16,14 @@ module.exports = function(router, database) {
     user.password = bcrypt.hashSync(user.password, 12);
     database.addUser(user)
       .then(user => {
+        console.log('this is user from helper')
+        console.log(user)
         if (!user) {
           res.send({error: 'error'});
           return;
         }
         req.session.userId = user.id;
-        res.send('success');
+        res.send('successful registration');
       })
       .catch(e => res.send(e))
   });
@@ -42,7 +44,7 @@ module.exports = function(router, database) {
     login(username, password)
       .then(user => {
         if(!user) {
-          res.send({error: 'error'});
+          res.send({error: 'User does not exist or password does not match'});
           return;
         }
         req.session.userId = user.id;

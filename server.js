@@ -10,6 +10,8 @@ const app = express();
 // install then add code
 // const bcrypy = require('bcrypt');
 
+app.set("view engine", "ejs");
+
 const cookieSession = require('cookie-session');
 app.use(cookieSession({
  name: 'session',
@@ -26,7 +28,8 @@ app.use('/users', userRouter);
 
 // Routes
 app.get('/', (req, res) => {
-  res.send('Hello Tammy!')
+  // res.send('Hello Tammy!')
+  res.render('index');
 });
 
 app.listen(PORT, () => {
