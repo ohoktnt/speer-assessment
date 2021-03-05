@@ -14,18 +14,26 @@ module.exports = function(router, database) {
   router.post('/', (req, res) => {
     const user = req.body;
     user.password = bcrypt.hashSync(user.password, 12);
-    database.addUser(user)
-      .then(user => {
-        console.log('this is user from helper')
-        console.log(user)
-        if (!user) {
-          res.send({error: 'error'});
-          return;
-        }
-        req.session.userId = user.id;
-        res.send('successful registration');
-      })
-      .catch(e => res.send(e))
+    // check if username is not used
+    database.getUser(user.username)
+    .then(result => {
+      // register with valid username
+      if (!result) {
+        database.addUser(user)
+        .then(user => {
+          if (!user) {
+            res.send({error: 'error'});
+            return;
+          }
+          req.session.userId = user.id;
+          res.send('successful registration');
+        })
+        .catch(e => res.send(e))
+      // cancel registration
+      } else {
+        res.send('Sorry, this username has already been taken!')
+      }
+    })
   });
 
   const login = function(username, password) {
