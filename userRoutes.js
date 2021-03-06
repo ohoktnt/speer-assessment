@@ -26,11 +26,12 @@ module.exports = function(router, database) {
             return;
           }
           req.session.userId = user.id;
-          res.send('successful registration');
+          res.send('Successful registration');
         })
         .catch(e => res.send(e))
       // cancel registration
       } else {
+        res.status(409)
         res.send('Sorry, this username has already been taken!')
       }
     })

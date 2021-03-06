@@ -6,16 +6,51 @@ const { expect } = chai;
 
 chai.use(chaiHttp);
 
-describe('Testing new chai http library', () => {
+describe('Testing Registration', () => {
   it('should return all users on /users GET', function(done) {
     chai.request('http://localhost:8000')
         .get('/users')
         .end(function(err, res) {
           expect(res).to.have.status(200)
           expect(res).to.be.json;
-          // res.body.should.be.a('array');
-          // console.log(res.body)
+          expect(res.body).to.be.an('array');
           done()
         })
   })
+
+  it('should successfully register with unique username on /users POST', function(done) {
+    chai.request('http://localhost:8000')
+        .post('/users')
+        .type('form')
+        .send({
+          'username': 'testing',
+          'password': '123456'
+        })
+        .end(function(err, res) {
+          // console.log(res)
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          expect(res).to.have.cookie('session')
+          expect(res.text).to.be.equal('Successful registration')
+          done()
+        })
+  })
+
+  it('should not register user with existing username on /users POST', function(done) {
+    chai.request('http://localhost:8000')
+      .post('/users')
+      .type('form')
+      .send({
+        'username': 'testing',
+        'password': '123456'
+      })
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res).to.have.status(409);
+        expect(res).to.not.have.cookie('session')
+        expect(res.text).to.be.equal('Sorry, this username has already been taken!')
+        done()
+      })
+  })
+
 })
