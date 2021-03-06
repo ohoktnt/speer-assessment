@@ -29,7 +29,7 @@ const tweetRouter = express.Router();
 tweetRoutes(tweetRouter, database);
 app.use('/tweets', tweetRouter);
 
-// index 
+// homepage 
 app.get('/', (req, res) => {
   res.render('index');
 });

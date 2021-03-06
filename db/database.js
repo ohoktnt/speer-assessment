@@ -10,14 +10,23 @@ const pool = new Pool({
 });
 
 // USERS DATABASE HELPERS
-const getUser = function(username) {
+const getUserByName = function(username) {
   return pool.query(`
   SELECT * FROM users
   WHERE username = $1;
   `, [username])
     .then(res => res.rows[0]);
 };
-exports.getUser = getUser;
+exports.getUserByName = getUserByName;
+
+const getUserById = function(user_id) {
+  return pool.query(`
+  SELECT * FROM users
+  WHERE id = $1;
+  `, [user_id])
+    .then(res => res.rows[0]);
+};
+exports.getUserById = getUserById;
 
 const addUser = function(user) {
   return pool.query(`

@@ -9,13 +9,21 @@ module.exports = function(router, database) {
       })
       .catch(e => res.send(e));
   });
+  // Get single user in database
+  router.get('/:user_id', (req, res) => {
+    database.getUserById(req.params.user_id)
+      .then(result => {
+        res.send(result);
+      })
+      .catch(e => res.send(e));
+  });
 
   // REGISTRATION LOGIC
   router.post('/', (req, res) => {
     const user = req.body;
     user.password = bcrypt.hashSync(user.password, 12);
     // check if username is not used
-    database.getUser(user.username)
+    database.getUserByName(user.username)
       .then(result => {
         // no user found with the username, proceed with registration
         if (!result && user.username.length > 3) {
@@ -42,7 +50,7 @@ module.exports = function(router, database) {
 
   // LOGIN LOGIC
   const login = function(username, password) {
-    return database.getUser(username)
+    return database.getUserByName(username)
       .then(user => {
         if (bcrypt.compareSync(password, user.password)) {
           return user;

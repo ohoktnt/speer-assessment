@@ -20,6 +20,18 @@ describe('Testing Registration', () => {
       });
   });
 
+  it('should return specific users on /users/:user_id GET', function(done) {
+    chai.request('http://localhost:8003')
+      .get('/users/1')
+      .end(function(err, res) {
+        expect(res).to.have.status(200);
+        expect(res).to.be.json;
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.deep.include({id: 1});
+        done();
+      });
+  });
+
   it('should successfully register with unique username on /users POST', function(done) {
     chai.request('http://localhost:8003')
       .post('/users')
