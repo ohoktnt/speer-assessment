@@ -44,7 +44,6 @@ Hello! Thank you for taking your time to review my submission. For this app, I u
 |/users|POST| Register new user|
 |/users/login|POST| Login as user|
 |/users/logout|POST| Logout user and clear session|
-|/users/:user_id|GET | Get specific user|
 |/users/:user_id/messages|GET| Get all messages sent and received from user|
 |/users/:user_id/messages|POST| Send a message as a user|
 |/users/:user_id/messages/:chat_user_id| GET |all messages sent between two users|

@@ -1,7 +1,7 @@
 // Server Setup:
-const database = require('./database');
-const userRoutes = require('./userRoutes');
-const tweetRoutes = require('./tweetsRoutes');
+const database = require('./db/database');
+const userRoutes = require('./routes/userRoutes');
+const tweetRoutes = require('./routes/tweetsRoutes');
 
 const express = require('express');
 const bodyParser = require('body-parser');
