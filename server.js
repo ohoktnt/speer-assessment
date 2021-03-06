@@ -5,7 +5,7 @@ const tweetRoutes = require('./tweetsRoutes')
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const PORT = 8000;
+const PORT = 8002;
 const app = express();
 
 app.set("view engine", "ejs");

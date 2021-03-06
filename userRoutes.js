@@ -64,7 +64,7 @@ module.exports = function(router, database) {
       .catch(e => res.send(e))
   })
 
-  // MESSAGES
+  // MESSAGE LOGIC
   // get all message from and to this user
   router.get('/:user_id/messages', (req, res) => {
     database.getAllMessages(req.params.user_id)

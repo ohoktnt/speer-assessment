@@ -9,7 +9,7 @@ chai.use(chaiHttp);
 describe('Testing Login', () => {
 
   it('should successfully login with correct credentials on /users/login POST', function(done) {
-    chai.request('http://localhost:8000')
+    chai.request('http://localhost:8002')
     .post('/users/login')
     .type('form')
     .send({
@@ -28,7 +28,7 @@ describe('Testing Login', () => {
   });
 
   it('should not login with wrong credentials on /users/login POST', function(done) {
-    chai.request('http://localhost:8000')
+    chai.request('http://localhost:8002')
     .post('/users/login')
     .type('form')
     .send({
