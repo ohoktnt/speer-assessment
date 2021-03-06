@@ -67,3 +67,13 @@ const sendMessageToUser = function(sender_id, receiver_id, message) {
   .then(res => res.rows[0])
 }
 exports.sendMessageToUser = sendMessageToUser;
+
+// Tweets
+
+const getAllTweets = function() {
+  return pool.query(`
+  SELECT * FROM tweets
+  `)
+  .then(res => res.rows)
+}
+exports.getAllTweets = getAllTweets;

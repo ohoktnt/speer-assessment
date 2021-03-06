@@ -1,6 +1,7 @@
 // Server Setup:
 const database = require('./database');
 const userRoutes = require('./userRoutes');
+const tweetRoutes = require('./tweetsRoutes')
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -22,6 +23,11 @@ app.use(bodyParser.json());
 const userRouter = express.Router();
 userRoutes(userRouter, database);
 app.use('/users', userRouter);
+
+// /tweets/endpoints
+const tweetRouter = express.Router();
+tweetRoutes(tweetRouter, database);
+app.use('/tweets', tweetRouter)
 
 // Routes
 app.get('/', (req, res) => {

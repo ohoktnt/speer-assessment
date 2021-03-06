@@ -35,4 +35,4 @@ INSERT INTO messages (sender_id, receiver_id, message) VALUES (2, 1, 'This is a 
 INSERT INTO messages (sender_id, receiver_id, message) VALUES (2, 1, 'Another Message!');
 INSERT INTO messages (sender_id, receiver_id, message) VALUES (2, 3, 'Hey Jess!');
 
-
+INSERT INTO tweets (user_id, content) VALUES (1, 'This is my first tweet!')
