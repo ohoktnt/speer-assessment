@@ -58,9 +58,39 @@ module.exports = function(router, database) {
           return;
         }
         req.session.userId = user.id;
+        // req.session.username = user.username;
         res.send({user: {id: user.id, username: user.username}})
       })
       .catch(e => res.send(e))
+  })
+
+  // MESSAGES
+  // get all message from and to this user
+  router.get('/:user_id/messages', (req, res) => {
+    database.getAllMessages(req.params.user_id)
+    .then(result => {
+      res.send(result)
+    })
+    .catch(e => res.send(e))
+  })
+
+  // get messages between two users
+  router.get('/:user_id/messages/:chat_user_id', (req, res) => {
+    database.getChatBetweenUsers(req.params.user_id, req.params.chat_user_id)
+    .then(result => {
+      res.send(result)
+    })
+    .catch(e => res.send(e))
+  })
+
+  // send message to user
+  router.post('/:user_id/messages', (req, res) => {
+    const { receiver_id, message } = req.body
+    database.sendMessageToUser(req.session.userId, receiver_id, message)
+    .then(result => {
+      res.send(result)
+    })
+    .catch(e => res.send(e))
   })
 
 }

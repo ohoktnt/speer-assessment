@@ -24,4 +24,15 @@ CREATE TABLE messages (
 );
 
 -- password is 123456
-INSERT INTO users (username, password) VALUES ('tnt', '$2b$12$/bdP/xrwPfzaYHkSboTqpORsPZNuttn0CpEzerdDVRSmiTp.6BWu.')
+INSERT INTO users (username, password) VALUES ('tnt', '$2b$12$/bdP/xrwPfzaYHkSboTqpORsPZNuttn0CpEzerdDVRSmiTp.6BWu.');
+INSERT INTO users (username, password) VALUES ('lisa', '$2b$12$/bdP/xrwPfzaYHkSboTqpORsPZNuttn0CpEzerdDVRSmiTp.6BWu.');
+INSERT INTO users (username, password) VALUES ('jess', '$2b$12$/bdP/xrwPfzaYHkSboTqpORsPZNuttn0CpEzerdDVRSmiTp.6BWu.');
+
+
+INSERT INTO messages (sender_id, receiver_id, message) VALUES (1, 2, 'Hey Lisa!');
+INSERT INTO messages (sender_id, receiver_id, message) VALUES (2, 1, 'Hey Tammy!');
+INSERT INTO messages (sender_id, receiver_id, message) VALUES (2, 1, 'This is a message!');
+INSERT INTO messages (sender_id, receiver_id, message) VALUES (2, 1, 'Another Message!');
+INSERT INTO messages (sender_id, receiver_id, message) VALUES (2, 3, 'Hey Jess!');
+
+

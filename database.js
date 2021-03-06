@@ -37,3 +37,33 @@ const getAllUsers = function() {
   .then(res => res.rows)
 }
 exports.getAllUsers = getAllUsers;
+
+const getAllMessages = function(userId) {
+  return pool.query(`
+  SELECT * FROM messages
+  WHERE sender_id = $1
+  OR receiver_id = $1
+  `, [userId])
+  .then(res => res.rows)
+}
+exports.getAllMessages = getAllMessages;
+
+const getChatBetweenUsers = function(user1, user2) {
+  return pool.query(`
+  SELECT * FROM messages
+  WHERE (sender_id = $1 AND receiver_id = $2)
+  OR (sender_id = $2 AND receiver_id = $1); 
+  `, [user1, user2])
+  .then(res => res.rows)
+}
+exports.getChatBetweenUsers = getChatBetweenUsers;
+
+const sendMessageToUser = function(sender_id, receiver_id, message) {
+  return pool.query(`
+  INSERT INTO messages (sender_id, receiver_id, message)
+  VALUES ($1, $2, $3)
+  RETURNING *;
+  `, [sender_id, receiver_id, message])
+  .then(res => res.rows[0])
+}
+exports.sendMessageToUser = sendMessageToUser;
