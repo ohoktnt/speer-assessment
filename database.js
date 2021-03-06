@@ -9,8 +9,7 @@ const pool = new Pool({
   port: 5432
 });
 
-// Users
-
+// USERS DATABASE HELPERS
 const getUser = function(username) {
   return pool.query(`
   SELECT * FROM users
@@ -68,8 +67,7 @@ const sendMessageToUser = function(sender_id, receiver_id, message) {
 };
 exports.sendMessageToUser = sendMessageToUser;
 
-// Tweets
-
+// TWEETS DATABASE HELPERS
 const getAllTweets = function() {
   return pool.query(`
   SELECT * FROM tweets;

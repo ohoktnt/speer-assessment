@@ -5,12 +5,12 @@ const tweetRoutes = require('./tweetsRoutes');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieSession = require('cookie-session');
 const PORT = 8003;
 const app = express();
 
 app.set("view engine", "ejs");
 
-const cookieSession = require('cookie-session');
 app.use(cookieSession({
   name: 'session',
   keys: ['key1', 'key2']
@@ -29,11 +29,11 @@ const tweetRouter = express.Router();
 tweetRoutes(tweetRouter, database);
 app.use('/tweets', tweetRouter);
 
-// Routes
+// index 
 app.get('/', (req, res) => {
   res.render('index');
 });
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
+  console.log(`Speer Assessment App listening on port ${PORT}`);
 });

@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 
 module.exports = function(router, database) {
-
+  // Get all users in Database
   router.get('/', (req, res) => {
     database.getAllUsers()
       .then(result => {

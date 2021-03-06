@@ -21,7 +21,6 @@ describe('Testing Login', () => {
         expect(res).to.have.status(200);
         expect(res).to.have.cookie('session');
         expect(res).to.be.json;
-        // console.log(res.body)
         expect(res.body).to.have.keys(['user']);
         done();
       });

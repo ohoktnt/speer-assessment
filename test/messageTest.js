@@ -61,12 +61,10 @@ describe('Testing Messages', function() {
                         expect(res).to.be.json;
                         expect(res.body).to.be.an('array');
                         expect(res.body).to.have.lengthOf(2);
-                        // console.log(res.body)
                         done();
                       });
                     });
       });
-    
   });
-
+  
 });

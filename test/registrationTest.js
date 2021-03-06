@@ -7,6 +7,7 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 describe('Testing Registration', () => {
+
   it('should return all users on /users GET', function(done) {
     chai.request('http://localhost:8003')
       .get('/users')
@@ -14,6 +15,7 @@ describe('Testing Registration', () => {
         expect(res).to.have.status(200);
         expect(res).to.be.json;
         expect(res.body).to.be.an('array');
+        expect(res.body).to.have.lengthOf(3);
         done();
       });
   });

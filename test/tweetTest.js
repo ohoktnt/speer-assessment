@@ -7,6 +7,7 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 describe('Testing Tweets', () => {
+
   it('should return all tweets on /tweets GET', function(done) {
     chai.request('http://localhost:8003')
       .get('/tweets')
@@ -63,7 +64,6 @@ describe('Testing Tweets', () => {
             chai.request('http://localhost:8003')
               .get('/tweets')
               .end(function(err, res) {
-                // console.log(res.body)
                 expect(res).to.have.status(200);
                 expect(res).to.be.json;
                 expect(res.body).to.be.an('array');
@@ -99,7 +99,6 @@ describe('Testing Tweets', () => {
                         expect(res).to.be.json;
                         expect(res.body).to.be.an('array');
                         expect(res.body).to.have.lengthOf(1);
-                        // console.log(res.body)
                         done();
                       });
                     });
@@ -126,7 +125,6 @@ describe('Testing Tweets', () => {
                       chai.request('http://localhost:8003')
                       .get('/tweets')
                       .end(function(err, res) {
-                        // console.log(res.body)
                         expect(res).to.have.status(200);
                         expect(res).to.be.json;
                         expect(res.body).to.be.an('array');
@@ -154,12 +152,10 @@ describe('Testing Tweets', () => {
         return agent.put('/tweets/1/edit')
                     .send({'content': 'Revised my first tweet!'})
                     .then(() => {
-                      // using another request, check the that tweet count did not change
+                      // using another request, check the that the tweet was changed
                       chai.request('http://localhost:8003')
                       .get('/tweets/1')
                       .end(function(err, res) {
-                        // console.log('this is revised tweet')
-                        // console.log(res.body)
                         expect(res).to.have.status(200);
                         expect(res).to.be.json;
                         expect(res.body).to.deep.include({content: "Revised my first tweet!"});
