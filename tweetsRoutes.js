@@ -18,7 +18,7 @@ module.exports = function(router, database) {
 
   router.post('/', (req, res) => {
     const tweet = req.body;
-    database.makeTweet(req.sesssion.user_id, tweet)
+    database.makeTweet(req.session.userId, tweet.content)
     .then(result => {
       res.send(result)
     })
@@ -47,7 +47,7 @@ module.exports = function(router, database) {
     database.getTweet(req.params.tweet_id)
     .then(tweet => {
       if(tweet.user_id === req.session.userId) {
-        database.editTweet(req.session.userId, editedTweet)
+        database.editTweet(tweet.id, editedTweet.content)
         .then(result => {
           res.send(result)
         })

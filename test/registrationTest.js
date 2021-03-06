@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 
 describe('Testing Registration', () => {
   it('should return all users on /users GET', function(done) {
-    chai.request('http://localhost:8002')
+    chai.request('http://localhost:8003')
         .get('/users')
         .end(function(err, res) {
           expect(res).to.have.status(200)
@@ -19,7 +19,7 @@ describe('Testing Registration', () => {
   })
 
   it('should successfully register with unique username on /users POST', function(done) {
-    chai.request('http://localhost:8002')
+    chai.request('http://localhost:8003')
         .post('/users')
         .type('form')
         .send({
@@ -37,7 +37,7 @@ describe('Testing Registration', () => {
   })
 
   it('should not register user with existing username on /users POST', function(done) {
-    chai.request('http://localhost:8002')
+    chai.request('http://localhost:8003')
       .post('/users')
       .type('form')
       .send({

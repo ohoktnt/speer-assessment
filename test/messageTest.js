@@ -9,7 +9,7 @@ chai.use(chaiHttp);
 describe('Testing Messages', function() {
 
   it('should show all messages for the user on /users/1/messages GET', function(done) {
-    chai.request('http://localhost:8002')
+    chai.request('http://localhost:8003')
     .get('/users/1/messages')
     .end(function(err, res) {
       expect(res).to.have.status(200)
@@ -22,7 +22,7 @@ describe('Testing Messages', function() {
 
 
   it('should show the messages only between user 2 and user 3', function(done) {
-    chai.request('http://localhost:8002')
+    chai.request('http://localhost:8003')
     .get('/users/2/messages/3')
     .end(function(err, res) {
       expect(res).to.have.status(200)
@@ -34,7 +34,7 @@ describe('Testing Messages', function() {
   })
 
   it('should allow user to send a message to another user', function(done)  {
-    const agent = chai.request.agent('http://localhost:8002')
+    const agent = chai.request.agent('http://localhost:8003')
     // login as user to use cookie as id for messaging
     // agent used to retain cookie after request
     agent
@@ -55,7 +55,7 @@ describe('Testing Messages', function() {
       .then(function(res) {
         // using another request, check the that message count went 
         // from 1 to 2
-        chai.request('http://localhost:8002')
+        chai.request('http://localhost:8003')
         .get('/users/3/messages')
         .end(function(err, res) {
           expect(res).to.have.status(200)

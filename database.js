@@ -107,13 +107,13 @@ const deleteTweet = function(tweet_id) {
 }
 exports.deleteTweet = deleteTweet
 
-const editTweet = function(user_id, editedTweet) {
+const editTweet = function(tweet_id, editedTweet) {
   return pool.query(`
-  UPDATE users
+  UPDATE tweets
   SET content = $2
   WHERE id = $1
   RETURNING *;
-  `, [user_id, editedTweet])
+  `, [tweet_id, editedTweet])
   .then(res => res.rows[0])
 }
 exports.editTweet = editTweet
