@@ -14,10 +14,10 @@ const pool = new Pool({
 const getUser = function(username) {
   return pool.query(`
   SELECT * FROM users
-  WHERE username = $1
+  WHERE username = $1;
   `, [username])
-  .then(res => res.rows[0])
-}
+    .then(res => res.rows[0]);
+};
 exports.getUser = getUser;
 
 const addUser = function(user) {
@@ -26,26 +26,26 @@ const addUser = function(user) {
   VALUES ($1, $2)
   RETURNING *;
   `, [user.username, user.password])
-  .then(res => res.rows[0])
-}
+    .then(res => res.rows[0]);
+};
 exports.addUser = addUser;
 
 const getAllUsers = function() {
   return pool.query(`
-  SELECT * FROM users
+  SELECT * FROM users;
   `)
-  .then(res => res.rows)
-}
+    .then(res => res.rows);
+};
 exports.getAllUsers = getAllUsers;
 
 const getAllMessages = function(userId) {
   return pool.query(`
   SELECT * FROM messages
   WHERE sender_id = $1
-  OR receiver_id = $1
+  OR receiver_id = $1;
   `, [userId])
-  .then(res => res.rows)
-}
+    .then(res => res.rows);
+};
 exports.getAllMessages = getAllMessages;
 
 const getChatBetweenUsers = function(user1, user2) {
@@ -54,8 +54,8 @@ const getChatBetweenUsers = function(user1, user2) {
   WHERE (sender_id = $1 AND receiver_id = $2)
   OR (sender_id = $2 AND receiver_id = $1); 
   `, [user1, user2])
-  .then(res => res.rows)
-}
+    .then(res => res.rows);
+};
 exports.getChatBetweenUsers = getChatBetweenUsers;
 
 const sendMessageToUser = function(sender_id, receiver_id, message) {
@@ -64,27 +64,27 @@ const sendMessageToUser = function(sender_id, receiver_id, message) {
   VALUES ($1, $2, $3)
   RETURNING *;
   `, [sender_id, receiver_id, message])
-  .then(res => res.rows[0])
-}
+    .then(res => res.rows[0]);
+};
 exports.sendMessageToUser = sendMessageToUser;
 
 // Tweets
 
 const getAllTweets = function() {
   return pool.query(`
-  SELECT * FROM tweets
+  SELECT * FROM tweets;
   `)
-  .then(res => res.rows)
-}
+    .then(res => res.rows);
+};
 exports.getAllTweets = getAllTweets;
 
 const getTweet = function(tweet_id) {
   return pool.query(`
   SELECT * FROM tweets
-  WHERE id = $1
+  WHERE id = $1;
   `, [tweet_id])
-  .then(res => res.rows[0])
-}
+    .then(res => res.rows[0]);
+};
 exports.getTweet = getTweet;
 
 const makeTweet = function(user_id, tweet) {
@@ -93,8 +93,8 @@ const makeTweet = function(user_id, tweet) {
   VALUES ($1, $2)
   RETURNING *;
   `, [user_id, tweet])
-  .then(res => res.rows[0])
-}
+    .then(res => res.rows[0]);
+};
 exports.makeTweet = makeTweet;
 
 const deleteTweet = function(tweet_id) {
@@ -103,9 +103,9 @@ const deleteTweet = function(tweet_id) {
   WHERE id = $1
   RETURNING *;
   `, [tweet_id])
-  .then(res => res.rows[0])
-}
-exports.deleteTweet = deleteTweet
+    .then(res => res.rows[0]);
+};
+exports.deleteTweet = deleteTweet;
 
 const editTweet = function(tweet_id, editedTweet) {
   return pool.query(`
@@ -114,6 +114,6 @@ const editTweet = function(tweet_id, editedTweet) {
   WHERE id = $1
   RETURNING *;
   `, [tweet_id, editedTweet])
-  .then(res => res.rows[0])
-}
-exports.editTweet = editTweet
+    .then(res => res.rows[0]);
+};
+exports.editTweet = editTweet;
