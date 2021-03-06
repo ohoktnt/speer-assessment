@@ -50,7 +50,7 @@ module.exports = function(router, database) {
   exports.login = login;
 
   router.post('/login', (req, res) => {
-    const { username, password} = req.body;
+    const { username, password } = req.body;
     login(username, password)
       .then(user => {
         if(!user) {

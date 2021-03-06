@@ -77,3 +77,43 @@ const getAllTweets = function() {
   .then(res => res.rows)
 }
 exports.getAllTweets = getAllTweets;
+
+const getTweet = function(tweet_id) {
+  return pool.query(`
+  SELECT * FROM tweets
+  WHERE id = $1
+  `, [tweet_id])
+  .then(res => res.rows[0])
+}
+exports.getTweet = getTweet;
+
+const makeTweet = function(user_id, tweet) {
+  return pool.query(`
+  INSERT INTO tweets (user_id, content)
+  VALUES ($1, $2)
+  RETURNING *;
+  `, [user_id, tweet])
+  .then(res => res.rows[0])
+}
+exports.makeTweet = makeTweet;
+
+const deleteTweet = function(tweet_id) {
+  return pool.query(`
+  DELETE FROM tweets CASCADE
+  WHERE id = $1
+  RETURNING *;
+  `, [tweet_id])
+  .then(res => res.rows[0])
+}
+exports.deleteTweet = deleteTweet
+
+const editTweet = function(user_id, editedTweet) {
+  return pool.query(`
+  UPDATE users
+  SET content = $2
+  WHERE id = $1
+  RETURNING *;
+  `, [user_id, editedTweet])
+  .then(res => res.rows[0])
+}
+exports.editTweet = editTweet

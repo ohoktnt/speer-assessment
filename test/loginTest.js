@@ -13,7 +13,7 @@ describe('Testing Login', () => {
     .post('/users/login')
     .type('form')
     .send({
-      'username': 'test',
+      'username': 'tnt',
       'password': '123456'
     })
     .end(function(err, res) {
@@ -21,6 +21,7 @@ describe('Testing Login', () => {
       expect(res).to.have.status(200);
       expect(res).to.have.cookie('session')
       expect(res).to.be.json;
+      // console.log(res.body)
       expect(res.body).to.have.keys(['user'])
       done()
     })
@@ -31,7 +32,7 @@ describe('Testing Login', () => {
     .post('/users/login')
     .type('form')
     .send({
-      'username': 'test',
+      'username': 'tnt',
       'password': '654321'
     })
     .end(function(err, res) {
