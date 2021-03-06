@@ -55,4 +55,21 @@ describe('Testing Registration', () => {
       });
   });
 
+  it('should not register user with username of less than 3 characters on /users POST', function(done) {
+    chai.request('http://localhost:8003')
+      .post('/users')
+      .type('form')
+      .send({
+        'username': 't',
+        'password': '123456'
+      })
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res).to.have.status(409);
+        expect(res).to.not.have.cookie('session');
+        expect(res.text).to.be.equal('Sorry, the chosen username is too short! Minmum 3 characters please.');
+        done();
+      });
+  });
+
 });

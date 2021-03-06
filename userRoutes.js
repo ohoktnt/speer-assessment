@@ -18,7 +18,7 @@ module.exports = function(router, database) {
     database.getUser(user.username)
       .then(result => {
         // no user found with the username, proceed with registration
-        if (!result) {
+        if (!result && user.username.length > 3) {
           database.addUser(user)
             .then(user => {
               if (!user) {
@@ -29,6 +29,9 @@ module.exports = function(router, database) {
               res.send('Successful registration');
             })
             .catch(e => res.send(e));
+        } else if (user.username.length <= 3) {
+          res.status(409);
+          res.send('Sorry, the chosen username is too short! Minmum 3 characters please.')        
         // cancel registration
         } else {
           res.status(409);
