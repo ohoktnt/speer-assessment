@@ -10,7 +10,7 @@ module.exports = function(router, database) {
     // res.send('looking at users routes')
   })
 
-  // Create a new user
+  // REGISTRATION LOGIC
   router.post('/', (req, res) => {
     const user = req.body;
     user.password = bcrypt.hashSync(user.password, 12);
@@ -37,6 +37,7 @@ module.exports = function(router, database) {
     })
   });
 
+  // LOGIN LOGIC
   const login = function(username, password) {
     return database.getUser(username)
       .then(user => {

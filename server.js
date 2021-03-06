@@ -2,13 +2,10 @@
 const database = require('./database');
 const userRoutes = require('./userRoutes');
 
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const PORT = 8000;
 const app = express();
-// install then add code
-// const bcrypy = require('bcrypt');
 
 app.set("view engine", "ejs");
 
@@ -28,7 +25,6 @@ app.use('/users', userRouter);
 
 // Routes
 app.get('/', (req, res) => {
-  // res.send('Hello Tammy!')
   res.render('index');
 });
 
