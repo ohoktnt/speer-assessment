@@ -63,6 +63,11 @@ module.exports = function(router, database) {
       .catch(e => res.send(e));
   });
 
+  router.post('/logout', (req, res) => {
+    req.session = null;
+    res.send('You have logged out.')
+  })
+
   // MESSAGE LOGIC
   // get all message from and to this user
   router.get('/:user_id/messages', (req, res) => {

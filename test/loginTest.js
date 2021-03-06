@@ -44,4 +44,31 @@ describe('Testing Login', () => {
       });
   });
 
+  it('should clear the cookie session when the user logouts on /users/logout POST', function(done) {
+    const agent = chai.request.agent('http://localhost:8003');
+    // login as user to validate cookie
+    // agent used to retain cookie after request
+    agent
+      .post('/users/login')
+      .type('form')
+      .send({
+        'username': 'jess',
+        'password': '123456'
+      })
+      .then(function(res) {
+        expect(res).to.have.cookie('session');
+        expect(res.body).to.have.keys(['user']);
+        return agent.post('/users/logout')
+                    .then(() => {
+                      // using another request, check the that session has been cleared after logout
+                      chai.request('http://localhost:8003')
+                      .get('/users')
+                      .end(function(err, res) {
+                        expect(res).to.not.have.cookie('session');
+                        done();
+                      });
+                    });
+      });
+  });
+
 });
